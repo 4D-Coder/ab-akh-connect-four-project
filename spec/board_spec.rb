@@ -19,13 +19,13 @@ describe 'Board' do
       expect(@board.layout.length).to eq(42)
 
       num_columns = @board.layout.select do |key, value|
-        value[1] == 6
+        value[:row] == 6
       end
 
       expect(num_columns.length).to be(7)
 
       num_rows = @board.layout.select do |key, value|
-        value[0] == 3
+        value[:column] == 3
       end
 
       expect(num_rows.length).to be(6)
