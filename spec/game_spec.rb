@@ -22,8 +22,3 @@ describe Game do
         expect(@game.print_board).to eq("ABCDEFG\n.......\n.......\n.......\n.......\n.......\n.......\n")
     end
 end
-
-require './lib/game'
-require './lib/board'
-require './lib/checker'
-game = Game.new
