@@ -7,7 +7,7 @@ describe 'Board' do
       @board = Board.new
     end
 
-    it '1. Exists' do
+    it '1. Can create an instance' do
       expect(@board).to be_a(Board)
     end
 
