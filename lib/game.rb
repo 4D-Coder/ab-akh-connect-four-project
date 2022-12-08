@@ -4,4 +4,12 @@ class Game
     def initialize
         @board = {}
     end
+
+    def start
+        puts welcome_user
+    end
+
+    def welcome_user
+       "Welcome to CONNECT FOUR"
+    end
 end

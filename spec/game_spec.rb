@@ -13,4 +13,8 @@ describe Game do
     it '2. has readable attributes' do
         expect(@game.board).to eq({})
     end
+
+    it '3. can get welcome message' do
+        expect(@game.welcome_user).to eq("Welcome to CONNECT FOUR")
+    end
 end
