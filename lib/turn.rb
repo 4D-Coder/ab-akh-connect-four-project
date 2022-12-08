@@ -1,7 +1,10 @@
+require './lib/board'
+
 class Turn 
-  attr_reader :turn
+  attr_reader :board
 
   def initialize
-    @turn = turn
+    @board = Board.new
   end
+
 end
