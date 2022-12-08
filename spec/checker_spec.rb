@@ -6,11 +6,11 @@ describe Checker do
             @checker = Checker.new("O")
         end
 
-        it 'exists' do
+        it '1. Can create an instance' do
             expect(@checker).to be_a(Checker)
         end
 
-        it 'can be an x or o' do
+        it '2. Can be an x or o' do
             expect(@checker.type).to eq("O")
 
             @checker = Checker.new("X")
