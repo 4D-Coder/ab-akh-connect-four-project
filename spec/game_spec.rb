@@ -11,7 +11,7 @@ describe Game do
     end
 
     it '2. has readable attributes' do
-        expect(@game.board).to be_a({})
+        expect(@game.board).to be_a(Board)
     end
 
     it '3. can get welcome message' do
