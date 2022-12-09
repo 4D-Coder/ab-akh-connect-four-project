@@ -38,9 +38,9 @@ class Game
             
             # Add line break to end of string accumulator
             board_string << "\n"
-            
+
             counter -= 1
         end
-        return board_string
+        board_string
     end
 end
