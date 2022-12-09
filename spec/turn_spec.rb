@@ -17,15 +17,15 @@ describe 'Turn' do
       #Should we create a player and add it as an argument to initialize a Turn?
     end
 
-    xit '3. can check if board is full' do
+    it '3. can check if board is full' do
       # Check that the board full method returns false when board is empty
       expect(@turn.board_full?).to eq(false)
-    
+      
       # Fill entire board with "X" checkers
-      @board.layout.each do |cell|
+      @turn.board.layout.each do |cell|
         cell[1][:checker] = "X"
       end
-
+     
       # Check that the board full method returns true when board is true
       expect(@turn.board_full?).to eq(true)          
     end
@@ -36,7 +36,7 @@ describe 'Turn' do
       expect(columns).to include(@turn.random_column)
 
       # Fill all columns expect for "A" with "X" checkers
-      @board.layout.each do |cell|
+      @turn.board.layout.each do |cell|
         cell[1][:checker] = "X" if cell[1][:column] != "A"
       end
 
@@ -46,7 +46,7 @@ describe 'Turn' do
 
     xit '5. can check if column is full' do
       # Fill all columns expect for "A" with "X" checkers
-      @board.layout.each do |cell|
+      @turn.board.layout.each do |cell|
         cell[1][:checker] = "X" if cell[1][:column] != "A"
       end
       
