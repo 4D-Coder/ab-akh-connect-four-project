@@ -1,4 +1,5 @@
 require './lib/game'
+require './lib/board'
 
 
 describe Game do
