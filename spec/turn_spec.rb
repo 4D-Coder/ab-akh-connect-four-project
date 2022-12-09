@@ -25,5 +25,19 @@ describe 'Turn' do
       end
       expect(@turn.board_full?).to eq(true)          
     end
+
+    xit '4. can get random column' do
+      # Check that random column returns anything from A-G
+      columns = ["A", "B", "C", "D", "E", "F", "G"]
+      expect(columns).to include(@turn.random_column)
+
+      # Fill all columns expect for "A" with "X" checkers
+      @board.layout.each do |cell|
+        cell[1][:checker] = "X" if cell[1][:column] != "A"
+      end
+
+      # Check that random column returns A when all other columns full
+      expect(turn.random_column).to eq("A")
+    end
   end
 end
