@@ -18,11 +18,15 @@ describe 'Turn' do
     end
 
     xit '3. can check if board is full' do
+      # Check that the board full method returns false when board is empty
       expect(@turn.board_full?).to eq(false)
     
+      # Fill entire board with "X" checkers
       @board.layout.each do |cell|
         cell[1][:checker] = "X"
       end
+
+      # Check that the board full method returns true when board is true
       expect(@turn.board_full?).to eq(true)          
     end
 
