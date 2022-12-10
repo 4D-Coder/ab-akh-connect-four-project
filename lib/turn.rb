@@ -51,4 +51,17 @@ class Turn
 
     column_cells.keys[0]
   end
+
+  def get_input
+    input = ""
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
+
+    until columns.include?(input)
+      puts "✧･ﾟ:* Select A Column *:･ﾟ✧"
+      puts " A - B - C - D - E - F - G"
+      input = gets.chomp
+    end
+    input
+  end
+
 end
