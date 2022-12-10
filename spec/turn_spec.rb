@@ -53,5 +53,15 @@ describe 'Turn' do
       expect(@turn.column_full?("A")).to eq(false)
       expect(@turn.column_full?("B")).to eq(true)
     end
+
+    it '6. can find the lowest position' do
+      #Analyzes the lowest placement in any given column
+      expect(@turn.lowest_position("G")).to eq(:G1)
+      
+      @turn.board.layout[:E1][:checker] = "X"
+
+      expect(@turn.lowest_position("E")).to eq(:E2)
+      
+    end
   end
 end
