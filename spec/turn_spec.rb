@@ -37,21 +37,21 @@ describe 'Turn' do
 
       # Fill all columns expect for "A" with "X" checkers
       @turn.board.layout.each do |cell|
-        cell[1][:checker] = "X" if cell[1][:column] != "A"
+        cell[1][:checker] = "X" if cell[1][:column] != 1
       end
 
       # Check that random column returns A when all other columns full
-      expect(turn.random_column).to eq("A")
+      expect(@turn.random_column).to eq("A")
     end
 
-    xit '5. can check if column is full' do
+    it '5. can check if column is full' do
       # Fill all columns expect for "A" with "X" checkers
       @turn.board.layout.each do |cell|
-        cell[1][:checker] = "X" if cell[1][:column] != "A"
+        cell[1][:checker] = "X" if cell[1][:column] != 1
       end
       
-      expect(turn.column_full?("A")).to eq(false)
-      expect(turn.column_full?("B")).to eq(true)
+      expect(@turn.column_full?("A")).to eq(false)
+      expect(@turn.column_full?("B")).to eq(true)
     end
   end
 end
