@@ -41,4 +41,14 @@ class Turn
 
     column_cells.empty?
   end
+
+  def lowest_position(column)
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
+
+    column_cells = @board.layout.select do |cell|
+      @board.layout[cell][:column] == (columns.index(column) + 1) && @board.layout[cell][:checker] == nil
+    end
+
+    column_cells.keys[0]
+  end
 end
