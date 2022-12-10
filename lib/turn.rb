@@ -21,10 +21,16 @@ class Turn
     full_board == 0
   end
 
-  # def random_column
-  #   columns = ["A", "B", "C", "D", "E", "F", "G"]
-  #   require 'pry'; binding.pry
-  # end
+  def random_column
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
+    columns.shuffle!
+
+    while column_full?(columns[0])
+      columns.shift
+    end
+    
+    columns[0]
+  end
 
   def column_full?(column)
     columns = ["A", "B", "C", "D", "E", "F", "G"]
@@ -32,7 +38,7 @@ class Turn
     column_cells = @board.layout.select do |cell|
       @board.layout[cell][:column] == (columns.index(column) + 1) && @board.layout[cell][:checker] == nil
     end
-    
+
     column_cells.empty?
   end
 end

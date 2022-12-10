@@ -30,7 +30,7 @@ describe 'Turn' do
       expect(@turn.board_full?).to eq(true)          
     end
 
-    xit '4. can get random column' do
+    it '4. can get random column' do
       # Check that random column returns anything from A-G
       columns = ["A", "B", "C", "D", "E", "F", "G"]
       expect(columns).to include(@turn.random_column)
