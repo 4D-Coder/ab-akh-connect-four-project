@@ -3,9 +3,6 @@ require './lib/turn'
 require './lib/game'
 require './lib/player'
 
-game = Game.new
-
-puts game.welcome_user
 input = ""
 
 until input == 'q'
@@ -15,9 +12,14 @@ until input == 'q'
     if input == 'q'
         break
     elsif input == 'p'
+        game = Game.new
+
+        puts game.welcome_user
         puts game.start
+        puts
+
+        input = ""
     else
         "Invalid input"
     end
 end
-
