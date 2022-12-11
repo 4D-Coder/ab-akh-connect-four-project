@@ -59,7 +59,13 @@ class Turn
     until columns.include?(input)
       puts "✧･ﾟ:* Select A Column *:･ﾟ✧"
       puts " A - B - C - D - E - F - G"
+      puts
       input = gets.chomp
+
+      if columns.include?(input) && column_full?(input) == true
+        puts "That column is FULL!"
+        input = ""
+      end
     end
 
     input
@@ -69,4 +75,14 @@ class Turn
     @board.layout[cell][:checker] = @player.checker
   end
 
+  def play_turn
+    if @player.name == "Computer"
+      add_checker(lowest_position(random_column))
+    else
+      add_checker(lowest_position(get_input))
+    end
+
+    #Iteration 3 check_winner?
+    #check_winner?(cell)
+  end
 end
