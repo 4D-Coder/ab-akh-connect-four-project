@@ -67,10 +67,10 @@ describe 'Turn' do
       
     end
 
-    xit '7. can add checker' do
+    it '7. can add checker' do
       expect(@turn.board.layout[:A1][:checker]).to eq(nil)
 
-      @turn.add_checker(:A1, @player.checker)
+      @turn.add_checker(:A1)
 
       expect(@turn.board.layout[:A1][:checker]).to eq('X')
 

@@ -65,4 +65,8 @@ class Turn
     input
   end
 
+  def add_checker(cell)
+    @board.layout[cell][:checker] = @player.checker
+  end
+
 end
