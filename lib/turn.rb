@@ -1,11 +1,11 @@
 require './lib/board'
 
 class Turn 
-  attr_reader :board, :turn
+  attr_reader :board, :player
 
-  def initialize
-    @turn = turn
-    @board = Board.new
+  def initialize(board, player)
+    @board = board
+    @player = player
   end
 
   def board_full?
@@ -51,4 +51,22 @@ class Turn
 
     column_cells.keys[0]
   end
+
+  def get_input
+    input = ""
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
+
+    until columns.include?(input)
+      puts "✧･ﾟ:* Select A Column *:･ﾟ✧"
+      puts " A - B - C - D - E - F - G"
+      input = gets.chomp
+    end
+
+    input
+  end
+
+  def add_checker(cell)
+    @board.layout[cell][:checker] = @player.checker
+  end
+
 end
