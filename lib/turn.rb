@@ -59,7 +59,13 @@ class Turn
     until columns.include?(input)
       puts "✧･ﾟ:* Select A Column *:･ﾟ✧"
       puts " A - B - C - D - E - F - G"
+      puts
       input = gets.chomp
+
+      if columns.include?(input) && column_full?(input) == true
+        puts "That column is FULL!"
+        input = ""
+      end
     end
 
     input
