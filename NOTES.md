@@ -13,7 +13,7 @@ until input == 'q'
     if input == 'q'
         break
     elsif input == 'p'
-        game.start()
+        puts game.start
     else
         "Invalid input"
     end
@@ -39,9 +39,15 @@ def start
         turn.play_turn
     end
 
-    announce_winner(winner)
+    if winner != "Draw"
+        winner_message = "#{winner} has won the game"
+    else
+        winner_mesage = "DRAW"
+    end
 
+    return winner_message
 end
+
 #Iteration 3
 def start
     puts print_board
