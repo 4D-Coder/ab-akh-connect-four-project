@@ -69,4 +69,14 @@ class Turn
     @board.layout[cell][:checker] = @player.checker
   end
 
+  def play_turn
+    if @player.name == "Computer"
+      add_checker(lowest_position(random_column))
+    else
+      add_checker(lowest_position(get_input))
+    end
+
+    #Iteration 3 check_winner?
+    #check_winner?(cell)
+  end
 end
