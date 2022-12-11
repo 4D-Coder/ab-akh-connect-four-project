@@ -1,11 +1,11 @@
 require './lib/board'
 
 class Turn 
-  attr_reader :board, :turn
+  attr_reader :board, :player
 
-  def initialize
-    @turn = turn
-    @board = Board.new
+  def initialize(board, player)
+    @board = board
+    @player = player
   end
 
   def board_full?
@@ -61,6 +61,7 @@ class Turn
       puts " A - B - C - D - E - F - G"
       input = gets.chomp
     end
+
     input
   end
 
