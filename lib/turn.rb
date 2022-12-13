@@ -136,6 +136,48 @@ class Turn
         winner = true
       end
     end
+
+    winner
+  end
+
+  def winner_column?(checker)
+    row = @board.layout[checker][:row]
+    column = @board.layout[checker][:column]
+
+    #Create a hash of each element in a column
+    column_set = @board.layout.select do |cell| #=> {}
+      @board.layout[cell][:column] == column
+    end
+
+    #Create an array of the sets of four cells in a column
+    sets_of_four = []
+    column_set.each_cons(4) do |set_of_four|
+      sets_of_four << set_of_four
+    end
+
+    #Create an array of the sets of four cells that contain the dropped checker
+    checker_sets = []
+    sets_of_four.each do |checker_set|
+
+      contains_checker = false
+      checker_set.each do |cell|
+        if @board.layout[cell[0]][:row] == row
+          contains_checker = true
+        end
+      end
+
+      if contains_checker
+        checker_sets << checker_set
+      end
+    end
+
+    #Determine if there is a column win condition containing the last checker dropped
+    winner = false
+    checker_sets.each do |set|
+      if connect_four?(set)
+        winner = true
+      end
+    end
     
     winner
   end
