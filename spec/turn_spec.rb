@@ -4,13 +4,13 @@ require './lib/player'
 
 
 describe 'Turn' do
-  context 'Iteration2' do
-    before(:each) do
-      @board = Board.new
-      @player = Player.new('Player', 'X')
-      @turn = Turn.new(@board, @player) 
-    end 
+  before(:each) do
+    @board = Board.new
+    @player = Player.new('Player', 'X')
+    @turn = Turn.new(@board, @player) 
+  end 
 
+  context 'Iteration2' do
     it '1. Can create an instance' do
       expect(@turn).to be_a(Turn)
     end
@@ -74,6 +74,64 @@ describe 'Turn' do
 
       expect(@turn.board.layout[:A1][:checker]).to eq('X')
 
+    end
+  end
+
+  context 'Iteration 3' do
+    it '8. Can check for connect four' do
+      not_connect_four = [[:A1, {column: 1, row: 1, checker: nil}],
+                          [:B1, {column: 2, row: 1, checker: 'X'}],
+                          [:C1, {column: 3, row: 1, checker: 'X'}],
+                          [:D1, {column: 4, row: 1, checker: 'X'}]]
+      expect(@turn.connect_four?(not_connect_four)).to eq(false)
+
+      not_connect_four = [[:A1, {column: 1, row: 1, checker: nil}],
+                          [:B1, {column: 2, row: 1, checker: nil}],
+                          [:C1, {column: 3, row: 1, checker: nil}],
+                          [:D1, {column: 4, row: 1, checker: nil}]]
+      expect(@turn.connect_four?(not_connect_four)).to eq(false)
+
+      connect_four = [[:A1, {column: 1, row: 1, checker: 'X'}],
+                      [:B1, {column: 2, row: 1, checker: 'X'}],
+                      [:C1, {column: 3, row: 1, checker: 'X'}],
+                      [:D1, {column: 4, row: 1, checker: 'X'}]]
+      expect(@turn.connect_four?(connect_four)).to eq(true)
+    end
+
+    it '9. can check for winner in row' do
+      expect(@turn.winner_row?(:A1)).to eq(false)
+
+      @turn.add_checker(:A1)
+      @turn.add_checker(:B1)
+      @turn.add_checker(:C1)
+      @turn.add_checker(:D1)
+
+      expect(@turn.winner_row?(:D1)).to eq(true) #Tests last piece played
+      expect(@turn.winner_row?(:F1)).to eq(false) #Test piece outside of win condition's row
+    end
+
+    it '10. can check for winner in column' do
+      expect(@turn.winner_column?(:A1)).to eq(false)
+
+      @turn.add_checker(:A1)
+      @turn.add_checker(:A2)
+      @turn.add_checker(:A3)
+      @turn.add_checker(:A4)
+
+      expect(@turn.winner_column?(:A4)).to eq(true) #Tests last piece played
+      expect(@turn.winner_column?(:A6)).to eq(false) #Test piece outside of win condition's column
+    end
+
+    it '11. can check for winner in down diagonal' do
+      expect(@turn.winner_down_diag?(:A1)).to eq(false)
+
+      @turn.add_checker(:B6)
+      @turn.add_checker(:C5)
+      @turn.add_checker(:D4)
+      @turn.add_checker(:E3)
+
+      expect(@turn.winner_down_diag?(:E3)).to eq(true) #Tests last piece played
+      expect(@turn.winner_down_diag?(:G1)).to eq(false) #Test piece outside of win condition's decending diagonal
     end
   end
 end
