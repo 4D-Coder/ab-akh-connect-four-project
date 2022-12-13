@@ -109,5 +109,17 @@ describe 'Turn' do
       expect(@turn.winner_row?(:D1)).to eq(true) #Tests last piece played
       expect(@turn.winner_row?(:F1)).to eq(false) #Test piece outside of win condition's row
     end
+
+    it '10. can check for winner in column' do
+      expect(@turn.winner_column?(:A1)).to eq(false)
+
+      @turn.add_checker(:A1)
+      @turn.add_checker(:A2)
+      @turn.add_checker(:A3)
+      @turn.add_checker(:A4)
+
+      expect(@turn.winner_column?(:A4)).to eq(true) #Tests last piece played
+      expect(@turn.winner_column?(:A6)).to eq(false) #Test piece outside of win condition's column
+    end
   end
 end
