@@ -4,13 +4,13 @@ require './lib/player'
 
 
 describe 'Turn' do
-  context 'Iteration2' do
-    before(:each) do
-      @board = Board.new
-      @player = Player.new('Player', 'X')
-      @turn = Turn.new(@board, @player) 
-    end 
+  before(:each) do
+    @board = Board.new
+    @player = Player.new('Player', 'X')
+    @turn = Turn.new(@board, @player) 
+  end 
 
+  context 'Iteration2' do
     it '1. Can create an instance' do
       expect(@turn).to be_a(Turn)
     end
@@ -75,5 +75,9 @@ describe 'Turn' do
       expect(@turn.board.layout[:A1][:checker]).to eq('X')
 
     end
+  end
+
+  context 'Iteration 3' do
+  
   end
 end

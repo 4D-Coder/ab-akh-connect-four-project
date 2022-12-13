@@ -81,8 +81,5 @@ class Turn
     else
       add_checker(lowest_position(get_input))
     end
-
-    #Iteration 3 check_winner?
-    #check_winner?(cell)
   end
 end
