@@ -78,6 +78,36 @@ describe 'Turn' do
   end
 
   context 'Iteration 3' do
-  
+    it '8. Can check for connect four' do
+      not_connect_four = [[:A1, {column: 1, row: 1, checker: nil}],
+                          [:B1, {column: 2, row: 1, checker: 'X'}],
+                          [:C1, {column: 3, row: 1, checker: 'X'}],
+                          [:D1, {column: 4, row: 1, checker: 'X'}]]
+      expect(@turn.connect_four?(not_connect_four)).to eq(false)
+
+      not_connect_four = [[:A1, {column: 1, row: 1, checker: nil}],
+                          [:B1, {column: 2, row: 1, checker: nil}],
+                          [:C1, {column: 3, row: 1, checker: nil}],
+                          [:D1, {column: 4, row: 1, checker: nil}]]
+      expect(@turn.connect_four?(not_connect_four)).to eq(false)
+
+      connect_four = [[:A1, {column: 1, row: 1, checker: 'X'}],
+                      [:B1, {column: 2, row: 1, checker: 'X'}],
+                      [:C1, {column: 3, row: 1, checker: 'X'}],
+                      [:D1, {column: 4, row: 1, checker: 'X'}]]
+      expect(@turn.connect_four?(connect_four)).to eq(true)
+    end
+
+    it '9. can check for winner in row' do
+      expect(@turn.winner_row?(:A1)).to eq(false)
+
+      @turn.add_checker(:A1)
+      @turn.add_checker(:B1)
+      @turn.add_checker(:C1)
+      @turn.add_checker(:D1)
+
+      expect(@turn.winner_row?(:D1)).to eq(true) #Tests last piece played
+      expect(@turn.winner_row?(:F1)).to eq(false) #Test piece outside of win condition's row
+    end
   end
 end
