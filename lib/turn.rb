@@ -181,4 +181,74 @@ class Turn
     
     winner
   end
+
+  def winner_down_diag?(checker)
+    row = @board.layout[checker][:row]
+    column = @board.layout[checker][:column]
+    diagonal_keys = [checker]
+
+    columns = ["A", "B", "C", "D", "E", "F", "G"] # <= Consider #Hash implementation
+
+    #Collect upper-left portion of the diagonal set
+    until (row + 1) > 6 || (column - 1) < 1
+      set_cell = (columns[column - 2] + (row + 1).to_s).to_sym
+      diagonal_keys << set_cell
+      row += 1
+      column -= 1
+    end
+    
+    #Resets row and column to starting cell
+    row = @board.layout[checker][:row]
+    column = @board.layout[checker][:column]
+
+    #Collect lower-right portion of the diagonal set
+    until (row - 1) < 1 || (column + 1) > 7
+      set_cell = (columns[column] + (row - 1).to_s).to_sym
+      diagonal_keys << set_cell
+      row -= 1
+      column += 1
+    end
+
+    #Resets row and column to starting cell
+    row = @board.layout[checker][:row]
+    column = @board.layout[checker][:column]
+
+    #Create a hash of each cell, in order, from left => right
+    diagonal_set = {}
+    diagonal_keys.sort.each do |cell|
+      diagonal_set[cell] = @board.layout[cell]
+    end
+
+    #Create an array of the sets of four cells in a diagonal
+    sets_of_four = []
+    diagonal_set.each_cons(4) do |set_of_four|
+      sets_of_four << set_of_four
+    end
+
+    #Create an array of the sets of four cells that contain the dropped checker
+    checker_sets = []
+    sets_of_four.each do |checker_set|
+
+      contains_checker = false
+      checker_set.each do |cell|
+        if @board.layout[cell[0]][:row] == row && @board.layout[cell[0]][:column] == column
+          contains_checker = true
+        end
+      end
+
+      if contains_checker
+        checker_sets << checker_set
+      end
+    end
+
+    #Determine if there is a column win condition containing the last checker dropped
+    winner = false
+    checker_sets.each do |set|
+      if connect_four?(set)
+        winner = true
+      end
+    end
+    
+    winner
+  end
 end
