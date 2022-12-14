@@ -133,5 +133,60 @@ describe 'Turn' do
       expect(@turn.winner_down_diag?(:E3)).to eq(true) #Tests last piece played
       expect(@turn.winner_down_diag?(:G1)).to eq(false) #Test piece outside of win condition's decending diagonal
     end
+    
+    it '12. can check for winner in up diagonal' do
+      expect(@turn.winner_up_diag?(:A1)).to eq(false)
+
+      @turn.add_checker(:B2)
+      @turn.add_checker(:C3)
+      @turn.add_checker(:D4)
+      @turn.add_checker(:E5)
+
+      expect(@turn.winner_up_diag?(:E5)).to eq(true) #Tests last piece played
+      expect(@turn.winner_up_diag?(:F6)).to eq(false) #Test piece outside of win condition's ascending diagonal
+    end
+
+    it '13. can check for any win condition' do
+      # Empty Board
+      expect(@turn.check_winner?(:A1)).to eq(false)
+
+      # Column win condition
+      @turn.add_checker(:A1)
+      @turn.add_checker(:A2)
+      @turn.add_checker(:A3)
+      @turn.add_checker(:A4)
+
+      expect(@turn.check_winner?(:A1)).to eq(true)
+
+      # Row win condition
+      @board = Board.new
+      @turn = Turn.new(@board, @player) 
+      @turn.add_checker(:A1)
+      @turn.add_checker(:B1)
+      @turn.add_checker(:C1)
+      @turn.add_checker(:D1)
+
+      expect(@turn.check_winner?(:D1)).to eq(true)
+
+      # Up Diagonal win condition
+      @board = Board.new
+      @turn = Turn.new(@board, @player) 
+      @turn.add_checker(:B2)
+      @turn.add_checker(:C3)
+      @turn.add_checker(:D4)
+      @turn.add_checker(:E5)
+
+      expect(@turn.check_winner?(:C3)).to eq(true)
+
+       # Down Diagonal win condition
+      @board = Board.new
+      @turn = Turn.new(@board, @player) 
+      @turn.add_checker(:B6)
+      @turn.add_checker(:C5)
+      @turn.add_checker(:D4)
+      @turn.add_checker(:E3)
+
+      expect(@turn.check_winner?(:E3)).to eq(true)
+    end
   end
 end

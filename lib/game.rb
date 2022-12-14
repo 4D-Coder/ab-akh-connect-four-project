@@ -52,21 +52,28 @@ class Game
         puts print_board
 
         turn = Turn.new(@board, @player)
+        winner = nil
     
         until turn.board_full?
             turn = Turn.new(@board, @player)
-            turn.play_turn
+            winner = turn.play_turn
             puts print_board
             puts
+            break if winner != nil
     
             turn = Turn.new(@board, @computer)
-            turn.play_turn
+            winner = turn.play_turn
             puts print_board
             puts
+            break if winner != nil
         end
-
-       "The game was a DRAW, you couldn't beat a computer choosing at random"
+        
+        if winner == @player
+            puts "Congratulations #{@player.name}, you win!"
+        elsif winner == @computer
+            puts "Sorry #{@player.name}, you lose!"
+        else
+            "The game was a DRAW, you couldn't beat a computer choosing at random"
+        end
     end
-
-    
 end
