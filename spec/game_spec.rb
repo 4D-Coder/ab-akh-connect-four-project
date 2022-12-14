@@ -1,5 +1,6 @@
 require './lib/game'
 require './lib/board'
+require './lib/player'
 
 
 describe Game do
@@ -17,18 +18,14 @@ describe Game do
         end
 
         it '3. can get welcome message' do
-            expect(@game.welcome_user).to eq("Welcome to CONNECT FOUR")
+            expect(@game.welcome_user).to eq("              Welcome to CONNECT FOUR")
         end
 
         it '4. can print board' do
-            expect(@game.print_board).to eq("ABCDEFG\n.......\n.......\n.......\n.......\n.......\n.......\n")
-        end
-    end
+            expect(@game.print_board).to eq(" A  B  C  D  E  F  G\n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n")
 
-    describe 'Iteration 2' do
-        before(:each) do 
-            @game = Game.new
+            @game.board.layout[:A1][:checker] = "X"
+            expect(@game.print_board).to eq(" A  B  C  D  E  F  G\n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n .  .  .  .  .  .  . \n X  .  .  .  .  .  . \n")
         end
-        
     end
 end

@@ -57,8 +57,8 @@ class Turn
     columns = ["A", "B", "C", "D", "E", "F", "G"]
 
     until columns.include?(input)
-      puts "✧･ﾟ:* Select A Column *:･ﾟ✧"
-      puts " A - B - C - D - E - F - G"
+      puts "✧･ﾟ:* #{@player.name}, Select a Column for your '#{@player.checker}' checker! *:･ﾟ✧"
+      puts "               A - B - C - D - E - F - G"
       puts
       input = gets.chomp
 

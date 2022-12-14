@@ -6,4 +6,8 @@ class Player
         @name = name
         @checker = checker
     end
+
+    def change_name(name)
+        @name = name
+    end
 end

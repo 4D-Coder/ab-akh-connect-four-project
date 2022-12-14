@@ -5,22 +5,17 @@ class Game
 
     def initialize
         @board = Board.new
-        @player = Player.new("Player", "X")
-        @computer = Player.new("Computer", "O")
+        @player1 = Player.new("Player", "X")
+        @player2 = Player.new("Computer", "O")
     end
 
-    # def start
-    #     puts welcome_user
-    #     puts print_board
-    # end
-
     def welcome_user
-       "Welcome to CONNECT FOUR"
+       "              Welcome to CONNECT FOUR"
     end
 
     def print_board
         # Create board string accumulator 
-        board_string = "ABCDEFG\n"
+        board_string = " A  B  C  D  E  F  G\n"
         counter = 6
 
         # Add each board cell's checker value to string in reverse row order, starting at 6
@@ -30,13 +25,13 @@ class Game
             row_string = @board.layout.select do |cell|
                 @board.layout[cell][:row] == counter
             end
-            #require "pry"; binding.pry
+           
             # Add each checker piece or '.' to the string accumulator
             row_string.each do |cell|
                 if cell[1][:checker] != nil
-                    board_string << cell[1][:checker]
+                    board_string << " #{cell[1][:checker]} "
                 else
-                    board_string << "."
+                    board_string << " . "
                 end
             end
             
@@ -49,31 +44,71 @@ class Game
     end
 
     def start
-        puts print_board
+        # Get total number of user players and request names
+        if get_number_of_players == "1"
+            puts "Player 1: Enter your name"
+            @player1.change_name(get_user_name)
+        else
+            puts "Player 1: Enter your name: "
+            @player1.change_name(get_user_name)
+            puts
 
-        turn = Turn.new(@board, @player)
+            puts "Player 2: Enter your name "
+            @player2.change_name(get_user_name)
+            puts
+        end
+
+        puts print_board
+        puts
+
+        turn = Turn.new(@board, @player1)
         winner = nil
-    
+        
+        # Play until the board is full or a win condition is made
         until turn.board_full?
-            turn = Turn.new(@board, @player)
+            turn = Turn.new(@board, @player1)
             winner = turn.play_turn
             puts print_board
             puts
             break if winner != nil
     
-            turn = Turn.new(@board, @computer)
+            turn = Turn.new(@board, @player2)
             winner = turn.play_turn
             puts print_board
             puts
             break if winner != nil
         end
         
-        if winner == @player
-            puts "Congratulations #{@player.name}, you win!"
-        elsif winner == @computer
-            puts "Sorry #{@player.name}, you lose!"
+        #Print the appropriate winner response
+        if winner == nil
+            "The game was a DRAW, how could this have happened??"
+        elsif winner.name == "Computer"
+            "The computer won selecting at random, wow."
+        elsif winner == @player1
+            "Congratulations #{@player1.name}, you win!"
         else
-            "The game was a DRAW, you couldn't beat a computer choosing at random"
+            "Congratulations #{@player2.name}, you win!"
         end
+    end
+
+    def get_number_of_players
+        input = ""
+
+        until input == '1' || input == '2'
+            puts "Please select '1' for single player against computer"
+            puts "                       OR"
+            puts "           Select '2' for two player"
+            puts " _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_"
+            input = gets.chomp
+        end
+        
+        input
+    end
+
+    def get_user_name
+        input = gets.chomp
+        puts "Good luck, #{input}!"
+        puts
+        input
     end
 end
