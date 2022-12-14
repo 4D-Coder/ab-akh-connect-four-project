@@ -14,5 +14,13 @@ describe Player do
             expect(@player.checker).to eq("X")
             expect(@player.name).to eq("Player")
         end
+        
+        it '3. Can change player name' do
+            expect(@player.name).to eq("Player")
+
+            @player.change_name("Test_Name")
+
+            expect(@player.name).to eq("Test_Name")
+        end
     end
 end

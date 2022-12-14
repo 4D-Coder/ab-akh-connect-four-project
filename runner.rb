@@ -6,7 +6,10 @@ require './lib/player'
 input = ""
 
 until input == 'q'
-    puts "Enter p to play. Enter q to quit"
+    puts
+    puts " ---------------------------------------------------"
+    puts "|       Enter 'p' to play OR Enter 'q' to quit      |"
+    puts " ---------------------------------------------------"
     input = gets.chomp
 
     if input == 'q'
@@ -14,7 +17,9 @@ until input == 'q'
     elsif input == 'p'
         game = Game.new
 
+        puts
         puts game.welcome_user
+        puts "----------------------------------------------------"
         puts game.start
         puts
 
