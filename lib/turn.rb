@@ -260,7 +260,7 @@ class Turn
     columns = ["A", "B", "C", "D", "E", "F", "G"] # <= Consider #Hash implementation
 
     #Collect upper-right portion of the diagonal set
-    until (row + 1) > 6 || (column + 1) < 7
+    until (row + 1) > 6 || (column + 1) > 7
       set_cell = (columns[column] + (row + 1).to_s).to_sym
       diagonal_keys << set_cell
       row += 1
@@ -320,5 +320,9 @@ class Turn
     end
     
     winner
+  end
+
+  def check_winner?(cell)
+    winner_row?(cell) || winner_column?(cell) || winner_down_diag?(cell) || winner_up_diag?(cell)
   end
 end
