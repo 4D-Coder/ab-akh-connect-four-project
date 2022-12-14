@@ -73,14 +73,21 @@ class Turn
 
   def add_checker(cell)
     @board.layout[cell][:checker] = @player.checker
+    cell
   end
 
   def play_turn
     if @player.name == "Computer"
-      add_checker(lowest_position(random_column))
+      if check_winner?(add_checker(lowest_position(random_column)))
+        winner = @player
+      end
     else
-      add_checker(lowest_position(get_input))
+      if check_winner?(add_checker(lowest_position(get_input)))
+        winner = @player
+      end
     end
+
+    winner
   end
 
   def connect_four?(four_cells)
