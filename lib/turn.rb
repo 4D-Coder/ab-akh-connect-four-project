@@ -109,18 +109,15 @@ class Turn
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Create a hash of each element in a row
-    row_set = @board.layout.select do |cell| #=> {}
+    row_set = @board.layout.select do |cell| 
       @board.layout[cell][:row] == row
     end
 
-    #Create an array of the sets of four cells in a row
     sets_of_four = []
     row_set.each_cons(4) do |set_of_four|
       sets_of_four << set_of_four
     end
 
-    #Create an array of the sets of four cells that contain the dropped checker
     checker_sets = []
     sets_of_four.each do |checker_set|
 
@@ -136,7 +133,6 @@ class Turn
       end
     end
 
-    #Determine if there is a row win condition containing the last checker dropped
     winner = false
     checker_sets.each do |set|
       if connect_four?(set)
@@ -151,18 +147,15 @@ class Turn
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Create a hash of each element in a column
-    column_set = @board.layout.select do |cell| #=> {}
+    column_set = @board.layout.select do |cell|
       @board.layout[cell][:column] == column
     end
 
-    #Create an array of the sets of four cells in a column
     sets_of_four = []
     column_set.each_cons(4) do |set_of_four|
       sets_of_four << set_of_four
     end
 
-    #Create an array of the sets of four cells that contain the dropped checker
     checker_sets = []
     sets_of_four.each do |checker_set|
 
@@ -178,7 +171,6 @@ class Turn
       end
     end
 
-    #Determine if there is a column win condition containing the last checker dropped
     winner = false
     checker_sets.each do |set|
       if connect_four?(set)
@@ -194,9 +186,8 @@ class Turn
     column = @board.layout[checker][:column]
     diagonal_keys = [checker]
 
-    columns = ["A", "B", "C", "D", "E", "F", "G"] # <= Consider #Hash implementation
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
 
-    #Collect upper-left portion of the diagonal set
     until (row + 1) > 6 || (column - 1) < 1
       set_cell = (columns[column - 2] + (row + 1).to_s).to_sym
       diagonal_keys << set_cell
@@ -204,11 +195,9 @@ class Turn
       column -= 1
     end
     
-    #Resets row and column to starting cell
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Collect lower-right portion of the diagonal set
     until (row - 1) < 1 || (column + 1) > 7
       set_cell = (columns[column] + (row - 1).to_s).to_sym
       diagonal_keys << set_cell
@@ -216,23 +205,19 @@ class Turn
       column += 1
     end
 
-    #Resets row and column to starting cell
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Create a hash of each cell, in order, from left => right
     diagonal_set = {}
     diagonal_keys.sort.each do |cell|
       diagonal_set[cell] = @board.layout[cell]
     end
 
-    #Create an array of the sets of four cells in a diagonal
     sets_of_four = []
     diagonal_set.each_cons(4) do |set_of_four|
       sets_of_four << set_of_four
     end
 
-    #Create an array of the sets of four cells that contain the dropped checker
     checker_sets = []
     sets_of_four.each do |checker_set|
 
@@ -248,7 +233,6 @@ class Turn
       end
     end
 
-    #Determine if there is a diagonal down win condition containing the last checker dropped
     winner = false
     checker_sets.each do |set|
       if connect_four?(set)
@@ -264,9 +248,8 @@ class Turn
     column = @board.layout[checker][:column]
     diagonal_keys = [checker]
 
-    columns = ["A", "B", "C", "D", "E", "F", "G"] # <= Consider #Hash implementation
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
 
-    #Collect upper-right portion of the diagonal set
     until (row + 1) > 6 || (column + 1) > 7
       set_cell = (columns[column] + (row + 1).to_s).to_sym
       diagonal_keys << set_cell
@@ -274,11 +257,9 @@ class Turn
       column += 1
     end
     
-    #Resets row and column to starting cell
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Collect lower-left portion of the diagonal set
     until (row - 1) < 1 || (column - 1) < 1
       set_cell = (columns[column - 2] + (row - 1).to_s).to_sym
       diagonal_keys << set_cell
@@ -286,23 +267,19 @@ class Turn
       column -= 1
     end
 
-    #Resets row and column to starting cell
     row = @board.layout[checker][:row]
     column = @board.layout[checker][:column]
 
-    #Create a hash of each cell, in order, from left => right
     diagonal_set = {}
     diagonal_keys.sort.each do |cell|
       diagonal_set[cell] = @board.layout[cell]
     end
 
-    #Create an array of the sets of four cells in a diagonal
     sets_of_four = []
     diagonal_set.each_cons(4) do |set_of_four|
       sets_of_four << set_of_four
     end
 
-    #Create an array of the sets of four cells that contain the dropped checker
     checker_sets = []
     sets_of_four.each do |checker_set|
 
@@ -318,7 +295,6 @@ class Turn
       end
     end
 
-    #Determine if there is a diagonal up win condition containing the last checker dropped
     winner = false
     checker_sets.each do |set|
       if connect_four?(set)

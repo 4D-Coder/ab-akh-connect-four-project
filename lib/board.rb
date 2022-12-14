@@ -9,24 +9,18 @@ class Board
     new_board = {}
     col = ["A", "B", "C", "D", "E", "F", "G"]
 
-    #Creates 7 columns
     7.times do |i|
+      6.times do |j|
+        row = j + 1
 
-        #Creates 6 rows
-        6.times do |j|
-            #Determine row
-            row = j + 1
+        key = col[i] + row.to_s
 
-            #Creates the key symbol for new_board hash
-            key = col[i] + row.to_s
-
-            #Putting key => value pair into new_board hash
-            new_board[key.to_sym] = {
-                column: i+1,
-                row: row,
-                checker: nil
-            }
-        end
+        new_board[key.to_sym] = {
+          column: i+1,
+          row: row,
+          checker: nil
+        }
+      end
     end
     new_board
   end
