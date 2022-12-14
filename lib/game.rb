@@ -9,10 +9,10 @@ class Game
         @computer = Player.new("Computer", "O")
     end
 
-    def start
-        puts welcome_user
-        puts print_board
-    end
+    # def start
+    #     puts welcome_user
+    #     puts print_board
+    # end
 
     def welcome_user
        "Welcome to CONNECT FOUR"
