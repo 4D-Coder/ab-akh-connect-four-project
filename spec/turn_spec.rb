@@ -133,5 +133,17 @@ describe 'Turn' do
       expect(@turn.winner_down_diag?(:E3)).to eq(true) #Tests last piece played
       expect(@turn.winner_down_diag?(:G1)).to eq(false) #Test piece outside of win condition's decending diagonal
     end
+
+    it '12. can check for winner in up diagonal' do
+      expect(@turn.winner_up_diag?(:A1)).to eq(false)
+
+      @turn.add_checker(:B2)
+      @turn.add_checker(:C3)
+      @turn.add_checker(:D4)
+      @turn.add_checker(:E5)
+
+      expect(@turn.winner_up_diag?(:E5)).to eq(true) #Tests last piece played
+      expect(@turn.winner_up_diag?(:F6)).to eq(false) #Test piece outside of win condition's ascending diagonal
+    end
   end
 end
