@@ -6,25 +6,25 @@ require './lib/player'
 input = ""
 
 until input == 'q'
+  puts
+  puts " ---------------------------------------------------"
+  puts "|       Enter 'p' to play OR Enter 'q' to quit      |"
+  puts " ---------------------------------------------------"
+  input = gets.chomp
+
+  if input == 'q'
+    break
+  elsif input == 'p'
+    game = Game.new
+
     puts
-    puts " ---------------------------------------------------"
-    puts "|       Enter 'p' to play OR Enter 'q' to quit      |"
-    puts " ---------------------------------------------------"
-    input = gets.chomp
+    puts game.welcome_user
+    puts "----------------------------------------------------"
+    puts game.start
+    puts
 
-    if input == 'q'
-        break
-    elsif input == 'p'
-        game = Game.new
-
-        puts
-        puts game.welcome_user
-        puts "----------------------------------------------------"
-        puts game.start
-        puts
-
-        input = ""
-    else
-        "Invalid input"
-    end
+    input = ""
+  else
+    "Invalid input"
+  end
 end
