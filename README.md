@@ -4,7 +4,7 @@
 This is a project made by students during Mod 1 of the Turing School of Software and Design program,
 *for learning purposes only*.
 
-A link to our video presentation of the project [here](<insert_link>)
+A link to our video presentation of the project [here](https://drive.google.com/file/d/1Bt7pM_7cqqTx7XS8FbvvAIJpmC2ys65y/view?usp=share_link)
 
 ---
 
